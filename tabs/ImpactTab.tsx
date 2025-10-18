@@ -33,7 +33,7 @@ const ImpactTab: React.FC = () => {
 
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
         <h2 className="font-semibold text-lg text-gray-800 mb-4">Global Pilot Program Footprint</h2>
-        <div className="bg-gray-100 h-80 rounded-md flex items-center justify-center relative overflow-hidden">
+        <div className="bg-gray-100 h-80 rounded-md flex items-center justify-center relative overflow-hidden" style={{ backgroundImage: `url(${IMAGES.home_hero})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <WorldMap />
             {/* Example pilot location pings */}
              {/* North America */}
