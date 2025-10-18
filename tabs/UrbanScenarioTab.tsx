@@ -25,14 +25,44 @@ const UrbanScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
     }
   }, [phase, speakIntro, speakResults]);
 
+  const [progress, setProgress] = useState(0);
+  const timerRef = React.useRef<number | null>(null);
+
   const startSimulation = () => {
     setPhase('simulating');
-    setTimeout(() => setPhase('processing'), 4000);
-    setTimeout(() => setPhase('dashboard'), 8000);
+    setProgress(0);
+    let localProgress = 0;
+    if (timerRef.current) window.clearInterval(timerRef.current);
+    timerRef.current = window.setInterval(() => {
+      localProgress += 2.5; // increments
+      if (localProgress <= 50) setProgress(localProgress);
+      else setProgress(50);
+    }, 200);
+
+    setTimeout(() => {
+      setPhase('processing');
+      // continue progress to 100
+      if (timerRef.current) window.clearInterval(timerRef.current);
+      timerRef.current = window.setInterval(() => {
+        localProgress += 2.5;
+        setProgress(Math.min(100, localProgress));
+        if (localProgress >= 100 && timerRef.current) {
+          window.clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      }, 200);
+    }, 4000);
+
+    setTimeout(() => {
+      setPhase('dashboard');
+      if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; }
+    }, 8000);
   };
 
   const resetSimulation = () => {
     setPhase('intro');
+    setProgress(0);
+    if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; }
   };
 
   const renderContent = () => {
