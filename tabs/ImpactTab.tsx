@@ -1,4 +1,5 @@
 import React from 'react';
+import { IMAGES } from '../assets';
 
 const WorldMap = () => (
     <svg viewBox="0 0 1000 500" className="w-full h-full">
