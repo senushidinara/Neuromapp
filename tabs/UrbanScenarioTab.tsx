@@ -99,9 +99,9 @@ const UrbanScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
              <button onClick={onBack} className="absolute top-6 left-6 text-gray-500 hover:text-gray-800">
                 &larr; Back to Scenarios
             </button>
-            {IMAGES.urban_gallery && IMAGES.urban_gallery.length ? (
+            {IMAGES.device_gallery && IMAGES.device_gallery.length ? (
               <div className="grid grid-cols-3 gap-2 mb-4 w-full">
-                {IMAGES.urban_gallery.map((src: string, i: number) => (
+                {IMAGES.device_gallery.map((src: string, i: number) => (
                   <img key={i} src={src} alt={`Urban ${i + 1}`} className="h-20 w-full object-cover rounded-md cursor-pointer" loading="lazy" onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }} />
                 ))}
               </div>
@@ -110,7 +110,7 @@ const UrbanScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             )}
 
             {lightboxOpen && (
-              <ImageLightbox images={IMAGES.urban_gallery || [IMAGES.urban_intro]} initialIndex={lightboxIndex} onClose={() => setLightboxOpen(false)} />
+              <ImageLightbox images={IMAGES.device_gallery || [IMAGES.urban_intro]} initialIndex={lightboxIndex} onClose={() => setLightboxOpen(false)} />
             )}
             <h1 className="text-2xl font-bold text-gray-900">Urban Clinic Scenario</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
