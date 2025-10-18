@@ -1,5 +1,5 @@
 # snowflake_demo.py
-# Real Snowflake AI advice for NeuroMapping cognitive risk
+# NeuroMapping: Snowflake Data Access Script
 
 from snowflake.snowpark.session import Session
 import getpass
@@ -7,28 +7,25 @@ import getpass
 # --- 1️⃣ Ask user for Snowflake password securely ---
 password = getpass.getpass("Enter your Snowflake password: ")
 
-# --- 2️⃣ Connect to Snowflake using your actual account ---
+# --- 2️⃣ Connect to Snowflake using your account ---
 session = Session.builder.configs({
-    "account": "oxwyfyd-lh07322",      # your dedicated URL
-    "user": "SENUSHIDINARA",           # your Snowflake username
+    "account": "oxwyfyd-lh07322",      # Dedicated Snowflake URL
+    "user": "SENUSHIDINARA",           # Snowflake username
     "password": password,
     "role": "SYSADMIN",
-    "warehouse": "COMPUTE_WH",         # warehouse name
-    "database": "NEUROMAPPING_DB",     # database for NeuroMapping
+    "warehouse": "COMPUTE_WH",         # Warehouse name
+    "database": "NEUROMAPPING_DB",     # Database storing cognitive risk scores
     "schema": "PUBLIC"
 }).create()
 
-# --- 3️⃣ Example cognitive risk score ---
-risk_score = 0.73  # Replace with your model output
+# --- 3️⃣ Query latest cognitive risk score from Snowflake ---
+# Replace 'RISK_SCORES' with your actual table name and columns
+result = session.table("RISK_SCORES").select("USER_ID", "RISK_SCORE").limit(5).collect()
 
-# --- 4️⃣ Use Snowflake LLM API to generate advice ---
-response = session.sql(f"""
-SELECT SYSTEM$AI_SUMMARIZE(
-'User cognitive risk score is {risk_score}. Provide simple, friendly advice to improve focus and mental safety.'
-)
-""").collect()
+# --- 4️⃣ Print retrieved data ---
+print("\n❄️ Latest Cognitive Risk Scores from Snowflake:")
+for row in result:
+    print(f"User ID: {row['USER_ID']}, Risk Score: {row['RISK_SCORE']:.2f}")
 
-# --- 5️⃣ Print AI-generated advice ---
-snowflake_advice = response[0][0]
-print("\n💡 Snowflake AI Advice:")
-print(snowflake_advice)
+# --- 5️⃣ Close session ---
+session.close()
