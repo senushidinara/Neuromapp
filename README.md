@@ -1,9 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+## 🏆 Hackathon Prize Relevance
 
-# Run and deploy your AI Studio app
+This project targets the following MLH Open Source Hackfest tracks:
 
+**Best Use of Gemini API**  
+NeuroMapping uses advanced AI logic (CNN + Transformer) to provide human-centric, actionable cognitive insights.
+
+**Best Documentation & Code for Good**  
+This project repository includes all required open source components to meet MLH guidelines for “Code for Good”:
+1. Open Source License (MIT)  
+2. Comprehensive README / Project Documentation  
+3. Contributing Guidelines  
+4. Code of Conduct  
+
+**Project Documentation:**  
+[NeuroMapping Project Documentation](https://ndroid.my.canva.site/neuromapping-project-documentation)  
+
+> Documentation is an integral part of open source projects. Clear, structured documentation ensures contributors can navigate, understand, and build upon the project efficiently. This hack uses fully detailed, standalone documentation (PDF + README.md) to demonstrate transparency, ethical workflow, and social impact.  
+
+**Social/Environmental Impact:**  
+NeuroMapping is designed as a low-cost, open-source system for early cognitive risk detection in rural communities, directly addressing real-world social and humanitarian challenges.  
+
+All components were created during the hackathon to ensure originality and research-based development, with no prior work reused. This validates our eligibility for the prizes while demonstrating thorough, replicable documentation and ethical open-source practices.
 This contains everything you need to run your app locally.
 
 View your app in AI Studio: https://ai.studio/apps/drive/1O6vdnvydREmk9TwFraCFwSMJB5L1V5Kd
