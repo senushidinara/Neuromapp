@@ -1,34 +1,34 @@
 # snowflake_demo.py
-# Demo: Snowflake AI advice for NeuroMapping cognitive risk
+# Real Snowflake AI advice for NeuroMapping cognitive risk
 
 from snowflake.snowpark.session import Session
 import getpass
 
-# Ask user for Snowflake password securely
+# --- 1️⃣ Ask user for Snowflake password securely ---
 password = getpass.getpass("Enter your Snowflake password: ")
 
-# Connect to Snowflake
+# --- 2️⃣ Connect to Snowflake using your actual account ---
 session = Session.builder.configs({
     "account": "oxwyfyd-lh07322",      # your dedicated URL
     "user": "SENUSHIDINARA",           # your Snowflake username
     "password": password,
     "role": "SYSADMIN",
-    "warehouse": "COMPUTE_WH",         # demo warehouse
-    "database": "NEUROMAPPING_DB",     # demo database
+    "warehouse": "COMPUTE_WH",         # warehouse name
+    "database": "NEUROMAPPING_DB",     # database for NeuroMapping
     "schema": "PUBLIC"
 }).create()
 
-# Example cognitive risk score (users can replace this with real model output)
-risk_score = 0.73
+# --- 3️⃣ Example cognitive risk score ---
+risk_score = 0.73  # Replace with your model output
 
-# Get AI-generated advice using Snowflake LLM API
+# --- 4️⃣ Use Snowflake LLM API to generate advice ---
 response = session.sql(f"""
 SELECT SYSTEM$AI_SUMMARIZE(
 'User cognitive risk score is {risk_score}. Provide simple, friendly advice to improve focus and mental safety.'
 )
 """).collect()
 
-# Print Snowflake AI advice
+# --- 5️⃣ Print AI-generated advice ---
 snowflake_advice = response[0][0]
 print("\n💡 Snowflake AI Advice:")
 print(snowflake_advice)
