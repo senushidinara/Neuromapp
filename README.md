@@ -1,4 +1,4 @@
-## 🏆 Hackathon Prize Relevance
+## 🏆 Hackathon 
 
 This project targets the following MLH Open Source Hackfest tracks:
 
@@ -23,7 +23,6 @@ NeuroMapping is designed as a low-cost, open-source system for early cognitive r
 All components were created during the hackathon to ensure originality and research-based development, with no prior work reused. This validates our eligibility for the prizes while demonstrating thorough, replicable documentation and ethical open-source practices.
 This contains everything you need to run your app locally.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1O6vdnvydREmk9TwFraCFwSMJB5L1V5Kd
 
 ## Run Locally
 
