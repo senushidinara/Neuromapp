@@ -14,6 +14,19 @@ const WorldMap = () => (
 
 const ImpactTab: React.FC = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [filter, setFilter] = useState<'all' | 'na' | 'sa' | 'eu' | 'af' | 'as'>('all');
+  const [selectedPing, setSelectedPing] = useState<any | null>(null);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+
+  const pings = [
+    { id: 'na', name: 'North America', top: '35%', left: '20%', region: 'na', stats: { screenings: 220, sessions: 6 }, images: IMAGES.dashboard_gallery },
+    { id: 'sa', name: 'South America', top: '65%', left: '30%', region: 'sa', stats: { screenings: 80, sessions: 3 }, images: IMAGES.rural_gallery },
+    { id: 'eu', name: 'Europe', top: '30%', left: '48%', region: 'eu', stats: { screenings: 140, sessions: 8 }, images: IMAGES.education_gallery },
+    { id: 'af', name: 'Africa', top: '55%', left: '52%', region: 'af', stats: { screenings: 90, sessions: 5 }, images: IMAGES.rural_gallery },
+    { id: 'as', name: 'Asia', top: '38%', left: '75%', region: 'as', stats: { screenings: 270, sessions: 10 }, images: IMAGES.device_gallery },
+  ];
+
+  const visiblePings = pings.filter(p => filter === 'all' ? true : p.region === filter);
 
   return (
     <div className="p-4 animate-fade-in">
