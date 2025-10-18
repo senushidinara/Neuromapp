@@ -5,7 +5,6 @@ import { useSpeech } from '../hooks/useSpeech';
 import { NARRATION } from '../services/geminiService';
 import { IMAGES } from '../assets';
 import ImageLightbox from '../components/ImageLightbox';
-import React, { useState } from 'react';
 
 type Phase = 'intro' | 'simulating' | 'processing' | 'dashboard';
 
