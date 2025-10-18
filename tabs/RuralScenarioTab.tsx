@@ -12,6 +12,8 @@ type Phase = 'intro' | 'simulating' | 'processing' | 'dashboard';
 
 const RuralScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
   const [phase, setPhase] = useState<Phase>('intro');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const speakIntro = useSpeech(NARRATION.rural_intro);
   const speakResults = useSpeech(NARRATION.rural_results);
 
