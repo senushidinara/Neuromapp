@@ -1,6 +1,7 @@
 import React from 'react';
 import { DATA } from '../services/geminiService';
 import { EthicsIcon } from '../constants';
+import { IMAGES } from '../assets';
 
 const EthicsTab: React.FC = () => {
   return (
