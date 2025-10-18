@@ -1,5 +1,6 @@
 import React from 'react';
 import { DATA } from '../services/geminiService';
+import { IMAGES } from '../assets';
 
 const RoadmapTab: React.FC = () => {
   const statusStyles = {
