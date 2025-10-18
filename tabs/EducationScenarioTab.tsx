@@ -78,7 +78,15 @@ const EducationScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             <button onClick={onBack} className="absolute top-6 left-6 text-gray-500 hover:text-gray-800">
                 &larr; Back to Scenarios
             </button>
+            {IMAGES.education_gallery && IMAGES.education_gallery.length ? (
+            <div className="grid grid-cols-3 gap-2 mb-4 w-full">
+                {IMAGES.education_gallery.map((src: string, i: number) => (
+                  <img key={i} src={src} alt={`Education ${i + 1}`} className="h-20 w-full object-cover rounded-md" />
+                ))}
+            </div>
+          ) : (
             <img src={IMAGES.education_intro} alt="Student with a school counselor" className="w-full h-48 object-cover rounded-lg mb-6"/>
+          )}
             <h1 className="text-2xl font-bold text-gray-900">Educational Support</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
               Learn how NeuroMapping provides objective insights to help educators tailor support for students with unique learning needs.
