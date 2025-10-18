@@ -36,7 +36,7 @@ const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
     setTimeout(() => { setPhase('dashboard'); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } }, 8000);
   };
 
-  const resetSimulation = () => { setPhase('intro'); setProgress(0); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } },
+  const resetSimulation = () => { setPhase('intro'); setProgress(0); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } };
 
   const renderContent = () => {
     switch (phase) {
