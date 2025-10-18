@@ -37,11 +37,11 @@ View your app in AI Studio: https://ai.studio/apps/drive/1O6vdnvydREmk9TwFraCFwS
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+'''
 
 
 
-
-# NeuroMapping: Snowflake Role
+## NeuroMapping: Snowflake Role
 
 In this project, **Snowflake acts as the central platform** for storing, managing, and providing access to cognitive risk score data. Here’s what Snowflake does in the setup:
 
