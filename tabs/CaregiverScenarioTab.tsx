@@ -71,7 +71,15 @@ const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             <button onClick={onBack} className="absolute top-6 left-6 text-gray-500 hover:text-gray-800">
                 &larr; Back to Scenarios
             </button>
+            {IMAGES.device_gallery && IMAGES.device_gallery.length ? (
+            <div className="grid grid-cols-3 gap-2 mb-4 w-full">
+                {IMAGES.device_gallery.map((src: string, i: number) => (
+                  <img key={i} src={src} alt={`Caregiver ${i + 1}`} className="h-20 w-full object-cover rounded-md" />
+                ))}
+            </div>
+          ) : (
             <img src={IMAGES.caregiver_intro} alt="Son helping his elderly father" className="w-full h-48 object-cover rounded-lg mb-6"/>
+          )}
             <h1 className="text-2xl font-bold text-gray-900">A Caregiver's Story</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
               See how at-home monitoring with NeuroMapping empowers a son to provide more empathetic and effective care for his aging father.
