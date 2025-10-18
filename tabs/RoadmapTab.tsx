@@ -22,7 +22,10 @@ const RoadmapTab: React.FC = () => {
               <span className={`text-xs font-semibold px-2 py-0.5 rounded-full mb-2 inline-block ${statusStyles[item.status as keyof typeof statusStyles]}`}>
                 {item.status.toUpperCase()}
               </span>
-              <h3 className="font-bold text-lg">{`Phase ${item.phase}: ${item.title}`}</h3>
+              <h3 className="font-bold text-lg">
+                <img src={IMAGES.brain_gallery?.[index % (IMAGES.brain_gallery?.length || 1)]} alt={`Phase ${item.phase}`} className="inline-block w-10 h-10 mr-3 align-middle rounded-md" loading="lazy" />
+                {`Phase ${item.phase}: ${item.title}`}
+              </h3>
               <p className="text-sm">{item.details}</p>
             </div>
           </div>
