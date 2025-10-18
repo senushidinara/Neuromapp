@@ -78,11 +78,15 @@ const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             {IMAGES.device_gallery && IMAGES.device_gallery.length ? (
             <div className="grid grid-cols-3 gap-2 mb-4 w-full">
                 {IMAGES.device_gallery.map((src: string, i: number) => (
-                  <img key={i} src={src} alt={`Caregiver ${i + 1}`} className="h-20 w-full object-cover rounded-md" />
+                  <img key={i} src={src} alt={`Caregiver ${i + 1}`} className="h-20 w-full object-cover rounded-md cursor-pointer" loading="lazy" onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }} />
                 ))}
             </div>
           ) : (
-            <img src={IMAGES.caregiver_intro} alt="Son helping his elderly father" className="w-full h-48 object-cover rounded-lg mb-6"/>
+            <img src={IMAGES.caregiver_intro} alt="Son helping his elderly father" className="w-full h-48 object-cover rounded-lg mb-6" loading="lazy"/>
+          )}
+
+          {lightboxOpen && (
+            <ImageLightbox images={IMAGES.device_gallery || [IMAGES.caregiver_intro]} initialIndex={lightboxIndex} onClose={() => setLightboxOpen(false)} />
           )}
             <h1 className="text-2xl font-bold text-gray-900">A Caregiver's Story</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
