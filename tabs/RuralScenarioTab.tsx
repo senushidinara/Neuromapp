@@ -5,7 +5,6 @@ import { NARRATION } from '../services/geminiService';
 import { InfoIcon, CommunityIcon } from '../constants';
 import { IMAGES } from '../assets';
 import ImageLightbox from '../components/ImageLightbox';
-import React, { useState } from 'react';
 
 
 type Phase = 'intro' | 'simulating' | 'processing' | 'dashboard';
