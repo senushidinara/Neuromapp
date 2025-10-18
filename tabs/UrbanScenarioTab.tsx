@@ -60,7 +60,15 @@ const UrbanScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
              <button onClick={onBack} className="absolute top-6 left-6 text-gray-500 hover:text-gray-800">
                 &larr; Back to Scenarios
             </button>
-            <img src={IMAGES.urban_intro} alt="Elderly person in a modern clinic" className="w-full h-48 object-cover rounded-lg mb-6" />
+            {IMAGES.urban_gallery && IMAGES.urban_gallery.length ? (
+              <div className="grid grid-cols-3 gap-2 mb-4 w-full">
+                {IMAGES.urban_gallery.map((src: string, i: number) => (
+                  <img key={i} src={src} alt={`Urban ${i + 1}`} className="h-20 w-full object-cover rounded-md" />
+                ))}
+              </div>
+            ) : (
+              <img src={IMAGES.urban_intro} alt="Elderly person in a modern clinic" className="w-full h-48 object-cover rounded-lg mb-6" />
+            )}
             <h1 className="text-2xl font-bold text-gray-900">Urban Clinic Scenario</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
               Follow an individual's journey through a routine cognitive health assessment at a local clinic, demonstrating how NeuroMapping provides quick and actionable insights for healthcare professionals.
