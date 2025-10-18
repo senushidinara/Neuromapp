@@ -1,6 +1,7 @@
 import React from 'react';
 import { DATA } from '../services/geminiService';
 import { EthicsIcon } from '../constants';
+import { IMAGES } from '../assets';
 
 const EthicsTab: React.FC = () => {
   return (
@@ -13,7 +14,11 @@ const EthicsTab: React.FC = () => {
           <div key={index} className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm flex items-start">
             <div className="flex-shrink-0 mr-4">
                 <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center">
-                    <EthicsIcon className="w-6 h-6 text-cyan-600" />
+                    {IMAGES.device_gallery && IMAGES.device_gallery.length ? (
+                      <img src={IMAGES.device_gallery[index % IMAGES.device_gallery.length]} alt={principle.title} className="w-8 h-8 rounded" loading="lazy" />
+                    ) : (
+                      <EthicsIcon className="w-6 h-6 text-cyan-600" />
+                    )}
                 </div>
             </div>
             <div>

@@ -25,9 +25,10 @@ export const BrainHeatmap: React.FC = () => {
 // Main component for simulation animations
 interface SimulationViewProps {
   phase: 'simulating' | 'processing';
+  progress?: number; // 0-100
 }
 
-const SimulationView: React.FC<SimulationViewProps> = ({ phase }) => {
+const SimulationView: React.FC<SimulationViewProps> = ({ phase, progress = phase === 'simulating' ? 25 : 75 }) => {
     const content = {
         simulating: {
             icon: <EegWaveIcon />,
@@ -40,7 +41,7 @@ const SimulationView: React.FC<SimulationViewProps> = ({ phase }) => {
             description: "The CNN & Transformer ensemble is analyzing the data to calculate the cognitive risk score."
         }
     };
-    
+
     const currentContent = content[phase];
 
     return (
@@ -50,9 +51,10 @@ const SimulationView: React.FC<SimulationViewProps> = ({ phase }) => {
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mt-6">{currentContent.title}</h2>
             <p className="text-gray-500 mt-2 max-w-md">{currentContent.description}</p>
-            <div className="w-full max-w-sm bg-gray-200 rounded-full h-2.5 mt-8 overflow-hidden">
-                <div className="bg-cyan-500 h-2.5 rounded-full" style={{ width: phase === 'simulating' ? '50%' : '100%', transition: 'width 4s ease-in-out' }}></div>
+            <div className="w-full max-w-sm bg-gray-200 rounded-full h-3 mt-8 overflow-hidden">
+                <div className="bg-cyan-500 h-3 rounded-full" style={{ width: `${Math.max(0, Math.min(100, progress))}%`, transition: 'width 200ms linear' }} />
             </div>
+            <div className="mt-2 text-sm text-gray-600">Progress: {Math.round(progress)}%</div>
         </div>
     );
 };

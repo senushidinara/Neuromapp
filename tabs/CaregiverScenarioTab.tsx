@@ -3,12 +3,17 @@ import SimulationView from '../components/ExplanationDisplay';
 import { useSpeech } from '../hooks/useSpeech';
 import { NARRATION } from '../services/geminiService';
 import { IMAGES } from '../assets';
+import ImageLightbox from '../components/ImageLightbox';
 import { InfoIcon, CommunityIcon } from '../constants';
 
 type Phase = 'intro' | 'simulating' | 'processing' | 'dashboard';
 
 const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
   const [phase, setPhase] = useState<Phase>('intro');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = React.useRef<number | null>(null);
   const speakIntro = useSpeech(NARRATION.caregiver_intro);
   const speakResults = useSpeech(NARRATION.caregiver_results);
 
@@ -19,17 +24,25 @@ const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
 
   const startSimulation = () => {
     setPhase('simulating');
-    setTimeout(() => setPhase('processing'), 4000);
-    setTimeout(() => setPhase('dashboard'), 8000);
+    setProgress(0);
+    let localProgress = 0;
+    if (timerRef.current) window.clearInterval(timerRef.current);
+    timerRef.current = window.setInterval(() => { localProgress += 2.5; if (localProgress <= 50) setProgress(localProgress); else setProgress(50); }, 200);
+    setTimeout(() => {
+      setPhase('processing');
+      if (timerRef.current) window.clearInterval(timerRef.current);
+      timerRef.current = window.setInterval(() => { localProgress += 2.5; setProgress(Math.min(100, localProgress)); if (localProgress >= 100 && timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } }, 200);
+    }, 4000);
+    setTimeout(() => { setPhase('dashboard'); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } }, 8000);
   };
-  
-  const resetSimulation = () => setPhase('intro');
+
+  const resetSimulation = () => { setPhase('intro'); setProgress(0); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } };
 
   const renderContent = () => {
     switch (phase) {
       case 'simulating':
       case 'processing':
-        return <SimulationView phase={phase} />;
+        return <SimulationView phase={phase} progress={progress} />;
       case 'dashboard':
         return (
           <div className="animate-fade-in bg-white p-8 rounded-2xl shadow-lg border border-gray-200 h-full flex flex-col">
@@ -55,12 +68,14 @@ const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
               </div>
             </div>
             <div className="flex justify-between items-center mt-6">
-              <button onClick={onBack} className="px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md hover:bg-gray-300">
-                  Back to Scenarios
-              </button>
-              <button onClick={resetSimulation} className="px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 bg-cyan-600 rounded-md hover:bg-cyan-500 focus:bg-cyan-700">
-                  Run New Assessment
-              </button>
+              <div className="flex items-center gap-3">
+                <button onClick={onBack} className="px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md hover:bg-gray-300">Back to Scenarios</button>
+                <button onClick={() => { const blob = new Blob([`Scenario: Caregiver\nNotes: Stable cognitive state`], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'caregiver-summary.txt'; a.click(); URL.revokeObjectURL(url); }} className="px-4 py-2 text-sm font-semibold text-gray-700 bg-white rounded-md border border-gray-200 hover:bg-gray-50">Download Summary</button>
+              </div>
+              <div className="flex items-center gap-3">
+                <button onClick={resetSimulation} className="px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 bg-cyan-600 rounded-md hover:bg-cyan-500 focus:bg-cyan-700">Run New Assessment</button>
+                <div className="text-sm text-gray-600">Simulation progress: <span className="font-semibold">{Math.round(progress)}%</span></div>
+              </div>
             </div>
           </div>
         );
@@ -71,7 +86,19 @@ const CaregiverScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             <button onClick={onBack} className="absolute top-6 left-6 text-gray-500 hover:text-gray-800">
                 &larr; Back to Scenarios
             </button>
-            <img src={IMAGES.caregiver_intro} alt="Son helping his elderly father" className="w-full h-48 object-cover rounded-lg mb-6"/>
+            {IMAGES.device_gallery && IMAGES.device_gallery.length ? (
+            <div className="grid grid-cols-3 gap-2 mb-4 w-full">
+                {IMAGES.device_gallery.map((src: string, i: number) => (
+                  <img key={i} src={src} alt={`Caregiver ${i + 1}`} className="h-20 w-full object-cover rounded-md cursor-pointer" loading="lazy" onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }} />
+                ))}
+            </div>
+          ) : (
+            <img src={IMAGES.caregiver_intro} alt="Son helping his elderly father" className="w-full h-48 object-cover rounded-lg mb-6" loading="lazy"/>
+          )}
+
+          {lightboxOpen && (
+            <ImageLightbox images={IMAGES.device_gallery || [IMAGES.caregiver_intro]} initialIndex={lightboxIndex} onClose={() => setLightboxOpen(false)} />
+          )}
             <h1 className="text-2xl font-bold text-gray-900">A Caregiver's Story</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
               See how at-home monitoring with NeuroMapping empowers a son to provide more empathetic and effective care for his aging father.
