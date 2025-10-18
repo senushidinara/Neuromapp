@@ -37,3 +37,42 @@ View your app in AI Studio: https://ai.studio/apps/drive/1O6vdnvydREmk9TwFraCFwS
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+
+
+
+# NeuroMapping: Snowflake Role
+
+In this project, **Snowflake acts as the central platform** for storing, managing, and providing access to cognitive risk score data. Here’s what Snowflake does in the setup:
+
+---
+
+## Snowflake’s Responsibilities
+
+1. **Data Storage**  
+   - Stores cognitive risk scores and related context in structured tables.  
+   - Ensures data is **secure, organized, and easily queryable**.
+
+2. **Integration Point**  
+   - Provides a secure API interface for other systems or services to access the data.  
+   - Enables **external applications or AI services** to query cognitive risk scores.
+
+3. **Data Management**  
+   - Handles data retrieval, aggregation, and updates efficiently.  
+   - Allows multiple users or scripts to access the same data reliably.
+
+4. **Orchestration for AI Processing**  
+   - Serves as the source of input data for AI workflows.  
+   - Ensures that cognitive risk scores are readily available for external processing.  
+
+---
+
+## How Users Interact with Snowflake
+
+- Users run `snowflake_demo.py` to query cognitive risk scores.  
+- Snowflake delivers the requested data in real time to the script.  
+- Users can also update or add new scores via Snowflake tables if needed.  
+
+---
+
+
