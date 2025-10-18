@@ -13,6 +13,8 @@ const EducationScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
   const [phase, setPhase] = useState<Phase>('intro');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = React.useRef<number | null>(null);
   const speakIntro = useSpeech(NARRATION.education_intro);
   const speakResults = useSpeech(NARRATION.education_results);
 
@@ -23,11 +25,19 @@ const EducationScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
 
   const startSimulation = () => {
     setPhase('simulating');
-    setTimeout(() => setPhase('processing'), 4000);
-    setTimeout(() => setPhase('dashboard'), 8000);
+    setProgress(0);
+    let localProgress = 0;
+    if (timerRef.current) window.clearInterval(timerRef.current);
+    timerRef.current = window.setInterval(() => { localProgress += 2.5; if (localProgress <= 50) setProgress(localProgress); else setProgress(50); }, 200);
+    setTimeout(() => {
+      setPhase('processing');
+      if (timerRef.current) window.clearInterval(timerRef.current);
+      timerRef.current = window.setInterval(() => { localProgress += 2.5; setProgress(Math.min(100, localProgress)); if (localProgress >= 100 && timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } }, 200);
+    }, 4000);
+    setTimeout(() => { setPhase('dashboard'); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } }, 8000);
   };
-  
-  const resetSimulation = () => setPhase('intro');
+
+  const resetSimulation = () => { setPhase('intro'); setProgress(0); if (timerRef.current) { window.clearInterval(timerRef.current); timerRef.current = null; } };
 
   const renderContent = () => {
     switch (phase) {
