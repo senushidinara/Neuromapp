@@ -3,6 +3,8 @@ import SimulationView from '../components/ExplanationDisplay';
 import { useSpeech } from '../hooks/useSpeech';
 import { NARRATION } from '../services/geminiService';
 import { IMAGES } from '../assets';
+import ImageLightbox from '../components/ImageLightbox';
+import React, { useState } from 'react';
 import { InfoIcon, CommunityIcon } from '../constants';
 
 type Phase = 'intro' | 'simulating' | 'processing' | 'dashboard';
