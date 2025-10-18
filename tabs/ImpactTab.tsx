@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IMAGES } from '../assets';
+import ImageLightbox from '../components/ImageLightbox';
 
 const WorldMap = () => (
     <svg viewBox="0 0 1000 500" className="w-full h-full">
