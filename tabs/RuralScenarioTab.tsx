@@ -64,7 +64,7 @@ const RuralScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
     switch (phase) {
       case 'simulating':
       case 'processing':
-        return <SimulationView phase={phase} />;
+        return <SimulationView phase={phase} progress={progress} />;
       case 'dashboard':
         return (
             <div className="animate-fade-in bg-white p-8 rounded-2xl shadow-lg border border-gray-200 h-full flex flex-col">
@@ -90,12 +90,14 @@ const RuralScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
                     </div>
                 </div>
                  <div className="flex justify-between items-center mt-6">
-                    <button onClick={onBack} className="px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md hover:bg-gray-300">
-                        Back to Scenarios
-                    </button>
-                    <button onClick={resetSimulation} className="px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 bg-cyan-600 rounded-md hover:bg-cyan-500 focus:bg-cyan-700">
-                        Run New Screening
-                    </button>
+                    <div className="flex items-center gap-3">
+                      <button onClick={onBack} className="px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md hover:bg-gray-300">Back to Scenarios</button>
+                      <button onClick={() => { const blob = new Blob([`Scenario: Rural Village\nStats: Screenings 15, Follow-ups 4`], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'rural-summary.txt'; a.click(); URL.revokeObjectURL(url); }} className="px-4 py-2 text-sm font-semibold text-gray-700 bg-white rounded-md border border-gray-200 hover:bg-gray-50">Download Summary</button>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button onClick={resetSimulation} className="px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 bg-cyan-600 rounded-md hover:bg-cyan-500 focus:bg-cyan-700">Run New Screening</button>
+                      <div className="text-sm text-gray-600">Simulation progress: <span className="font-semibold">{Math.round(progress)}%</span></div>
+                    </div>
                 </div>
             </div>
         );
