@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { SCENARIOS, NARRATION } from '../services/geminiService';
 import UrbanScenarioTab from './UrbanScenarioTab';
 import RuralScenarioTab from './RuralScenarioTab';
