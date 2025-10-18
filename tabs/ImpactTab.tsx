@@ -64,7 +64,14 @@ const ImpactTab: React.FC = () => {
                 <div className="w-3 h-3 bg-cyan-500 rounded-full absolute top-0 left-0 animate-ping-slow" style={{animationDelay: '1.2s'}}></div>
             </div>
         </div>
+        <div className="mt-4 flex justify-end">
+          <button onClick={() => setLightboxOpen(true)} className="px-3 py-2 bg-cyan-500 text-white rounded-md">View Photos</button>
+        </div>
       </div>
+
+      {lightboxOpen && (
+        <ImageLightbox images={IMAGES.education_gallery || [IMAGES.home_hero]} initialIndex={0} onClose={() => setLightboxOpen(false)} />
+      )}
     </div>
   );
 };
