@@ -85,11 +85,15 @@ const RuralScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             {IMAGES.rural_gallery && IMAGES.rural_gallery.length ? (
             <div className="grid grid-cols-3 gap-2 mb-4 w-full">
                 {IMAGES.rural_gallery.map((src: string, i: number) => (
-                  <img key={i} src={src} alt={`Rural ${i + 1}`} className="h-20 w-full object-cover rounded-md" />
+                  <img key={i} src={src} alt={`Rural ${i + 1}`} className="h-20 w-full object-cover rounded-md cursor-pointer" loading="lazy" onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }} />
                 ))}
             </div>
           ) : (
-            <img src={IMAGES.rural_intro} alt="Health worker with elders in a village" className="w-full h-48 object-cover rounded-lg mb-6"/>
+            <img src={IMAGES.rural_intro} alt="Health worker with elders in a village" className="w-full h-48 object-cover rounded-lg mb-6" loading="lazy"/>
+          )}
+
+          {lightboxOpen && (
+            <ImageLightbox images={IMAGES.rural_gallery || [IMAGES.rural_intro]} initialIndex={lightboxIndex} onClose={() => setLightboxOpen(false)} />
           )}
             <h1 className="text-2xl font-bold text-gray-900">Rural Village Scenario</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
