@@ -13,6 +13,8 @@ const WorldMap = () => (
 
 
 const ImpactTab: React.FC = () => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
   return (
     <div className="p-4 animate-fade-in">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">Community Engagement & Awareness</h1>
