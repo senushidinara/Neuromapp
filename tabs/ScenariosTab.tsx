@@ -5,6 +5,7 @@ import RuralScenarioTab from './RuralScenarioTab';
 import CaregiverScenarioTab from './CaregiverScenarioTab';
 import CorporateScenarioTab from './CorporateScenarioTab';
 import EducationScenarioTab from './EducationScenarioTab';
+import ImageLightbox from '../components/ImageLightbox';
 
 type ScenarioId = 'urban' | 'rural' | 'caregiver' | 'corporate' | 'education' | null;
 
