@@ -55,6 +55,7 @@ export const SCENARIOS = [
     title: 'Urban Clinic', 
     description: 'A proactive 72-year-old gets a routine cognitive check-up.',
     image: IMAGES.urban_clinic,
+    imageGallery: IMAGES.device_gallery || [],
     component: 'UrbanScenarioTab'
   },
   { 
@@ -62,6 +63,7 @@ export const SCENARIOS = [
     title: 'Rural Village', 
     description: 'A health worker runs a community screening in a low-resource area.',
     image: IMAGES.rural_village,
+    imageGallery: IMAGES.rural_gallery || [],
     component: 'RuralScenarioTab'
   },
   {
@@ -69,6 +71,7 @@ export const SCENARIOS = [
     title: "A Caregiver's Story",
     description: 'A son supports his aging father by monitoring his cognitive health at home.',
     image: IMAGES.caregiver_story,
+    imageGallery: IMAGES.device_gallery || [],
     component: 'CaregiverScenarioTab'
   },
   {
@@ -76,6 +79,7 @@ export const SCENARIOS = [
     title: 'Workplace Wellness',
     description: 'An employee uses the system to manage cognitive load and prevent burnout.',
     image: IMAGES.corporate_wellness,
+    imageGallery: IMAGES.dashboard_gallery || [],
     component: 'CorporateScenarioTab'
   },
   {
@@ -83,6 +87,7 @@ export const SCENARIOS = [
     title: 'Educational Support',
     description: 'A school counselor helps a student by identifying and addressing attention issues.',
     image: IMAGES.education_support,
+    imageGallery: IMAGES.education_gallery || [],
     component: 'EducationScenarioTab'
   }
 ];
