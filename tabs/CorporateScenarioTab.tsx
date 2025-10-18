@@ -82,11 +82,15 @@ const CorporateScenarioTab: React.FC<{onBack: () => void}> = ({ onBack }) => {
             {IMAGES.dashboard_gallery && IMAGES.dashboard_gallery.length ? (
             <div className="grid grid-cols-3 gap-2 mb-4 w-full">
                 {IMAGES.dashboard_gallery.map((src: string, i: number) => (
-                  <img key={i} src={src} alt={`Corporate ${i + 1}`} className="h-20 w-full object-cover rounded-md" />
+                  <img key={i} src={src} alt={`Corporate ${i + 1}`} className="h-20 w-full object-cover rounded-md cursor-pointer" loading="lazy" onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }} />
                 ))}
             </div>
           ) : (
-            <img src={IMAGES.corporate_intro} alt="Employee in a modern office" className="w-full h-48 object-cover rounded-lg mb-6"/>
+            <img src={IMAGES.corporate_intro} alt="Employee in a modern office" className="w-full h-48 object-cover rounded-lg mb-6" loading="lazy"/>
+          )}
+
+          {lightboxOpen && (
+            <ImageLightbox images={IMAGES.dashboard_gallery || [IMAGES.corporate_intro]} initialIndex={lightboxIndex} onClose={() => setLightboxOpen(false)} />
           )}
             <h1 className="text-2xl font-bold text-gray-900">Workplace Wellness</h1>
             <p className="text-gray-600 mt-2 mb-6 max-w-xl">
